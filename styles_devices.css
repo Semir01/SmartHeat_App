@@ -1,0 +1,132 @@
+/* Input i label */
+.info-side{
+   margin-top: 20px; 
+   margin-bottom: 20px;
+}
+#device {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#device label{
+  font-size: 25px;
+}
+#device input {
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+  background-color: rgba(14, 100, 124, 0.2);
+  color: white;
+  border: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 25px;
+  text-align: center;
+  border-bottom: 2px solid rgb(22, 130, 160);
+}
+
+/* Sekcija za temperaturu i vlažnost */
+#temp_humi {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+}
+#temp_humi label, #temp_humi span {
+  font-size: 25px;
+}
+#temp label{
+  margin-right: 5px;
+}
+#humi label{
+  margin-right: 5px;
+}
+
+/* Kontrolna sekcija */
+.control-side {
+  text-align: center;
+}
+.control-side p{
+  font-size: 25px;
+  padding: 10px;
+}
+.control-side button {
+  width: 45%;  /* Prilagodljiva širina */
+  max-width: 250px;
+  margin: 10px;
+  padding: 15px;
+  font-size: 20px;
+  color: white;
+  background-color: rgba(14, 100, 124, 0.7);
+  border-radius: 15px;
+  border: none;
+}
+.control-side button:hover {
+  background-color: rgb(22, 130, 160);
+}
+#status{
+  font-size: 25px;
+  padding: 10px;
+}
+/* Automatski režim */
+.Auto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 5px double cadetblue;
+}
+.Auto label{
+  font-size: 25px;
+  padding: 10px;
+}
+.Butons button {
+  margin: 10px;
+  padding: 10px;
+  width: 150px;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  background-color: rgba(14, 100, 124, 0.7);
+  font-size: 20px;
+}
+.Butons button:hover {
+  background-color: rgb(22, 130, 160);
+}
+#temp_setings{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 5px double cadetblue;
+  gap: 10px;
+}
+#temp_setings label{
+  font-size: 25px;
+}
+#temp_setings input{
+  width: 100%;
+  max-width: 150px;
+  height: 40px;
+  background-color: rgba(14, 100, 124, 0.3);
+  color: white;
+  border: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 25px;
+  text-align: center;
+  border-bottom: 2px solid rgb(22, 130, 160);
+}
+#MAX_TEMP{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#MIN_TEMP{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#status{
+  font-size: 25px;
+  text-align: center;
+}  

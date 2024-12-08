@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartHeat</title>
+  <link rel="stylesheet" href="Default.css">
+  <link rel="stylesheet" href="styles_setings.css">
+</head>
+<body>
+    <div class="container">
+      <header>SmartHeat 2024 </header>
+      <nav class="navbar">
+        <ul>
+          <li><a href="devices.html">Devices</a></li>
+          <li><a href="writingdiagram.html">Wiring diagram</a></li> 
+          <li><a href="setting.html">Settings</a></li>
+        </ul>
+      </nav> 
+
+      <div id="temp_setings">
+        <label for="max_temp">Maximum temperature °C:</label>
+        <input type="text" id="max_temp">
+        <label for="min_temp">Minimum temperature °C:</label>
+        <input type="text" id="min_temp">
+      </div>
+      <div class="Auto">
+        <label for="">Automatic activation</label>
+        <div class="Butons">
+          <button id="AutoON">ON</button>
+          <button id="AutoOFF">OFF</button>   
+        </div>
+      </div>
+      <div class="status" id="status">Status: Nepoznat</div>
+
+    </div>
+    <script src="script_setings.js"></script>
+</body>
+</html>

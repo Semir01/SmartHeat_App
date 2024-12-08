@@ -1,0 +1,126 @@
+/* Resetiranje stila */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+  
+/* Pozadina tijela */
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/technology-7997153_1280.jpg') no-repeat center center/cover;
+}
+/* Kontejner */
+.container {
+    background-color: rgba(50, 143, 168, 0.2);
+    padding: 20px;
+    width: 90%;  /* Prilagodljiva širina */
+    max-width: 1000px;
+    min-height: 100vh;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*gap: 30px;*/
+}
+  /* Naslov */
+.container header {
+    font-size: 3rem;
+    text-align: center;
+}
+/* Navigacija */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    background-color: rgba(14, 100, 124, 0.5);
+    border-bottom: 5px double cadetblue;
+  }
+  .navbar ul {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+  }
+  .navbar li {
+    padding: 10px;
+  }
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 20px;
+  }
+  .navbar a:hover {
+    background-color: rgb(22, 130, 160);
+    border-radius: 5px;
+  }
+  img{
+    margin-top: 20px;
+  }
+/* Media query za manje ekrane */
+@media (max-width: 768px) {
+  .container header {
+    font-size: 2rem;
+  }
+  .navbar {
+    display: flex;
+    height: 110px;
+  }
+  .navbar ul {
+    flex-direction: column;
+  }
+  .navbar li {
+    padding: 0px;
+    text-align: center;
+  }
+  .navbar a {
+    font-size: 15px;
+    padding: 0px;
+  }
+
+  #device label{
+    font-size: 20px;
+  }
+  #device input {
+    font-size: 20px;
+  }
+
+  #temp_humi {
+    flex-direction: column;
+  }
+  #temp_humi label, #temp_humi span {
+    font-size: 20px;
+    margin-right: 0px;
+  }
+  
+  .Auto {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .Auto label{
+    font-size: 20px;
+    padding: 0px;
+  }
+  .Auto button {
+    padding: 5px;
+    width: 100px;
+    font-size: 15px;
+  }
+
+  #temp_setings{
+    align-items: center;
+  }
+  #temp_setings label{
+    font-size: 20px;
+  }
+
+  .control-side p{
+    margin-top: 10px;
+    font-size: 20px;
+  }
+}

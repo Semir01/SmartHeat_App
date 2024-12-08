@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartHeat</title>
+  <link rel="stylesheet" href="styles_devices.css">
+  <link rel="stylesheet" href="Default.css">
+</head>
+<body>
+    <div class="container">
+      <header>SmartHeat 2024 </header>
+      <nav class="navbar">
+        <ul>
+          <li><a href="devices.html">Devices</a></li>
+          <li><a href="writingdiagram.html">Wiring diagram</a></li> 
+          <!-- <li><a href="setting.html">Settings</a></li> -->
+        </ul>
+      </nav>
+
+      <div class="info-side">
+        <div id="device">
+          <label for="device-name">Name of the device:</label>
+          <input type="text" id="device-name">
+        </div>
+        <div id="temp_humi">
+          <div id="temp">
+             <label for="">Current temperature:</label>
+            <span id="temperature"></span> <span>°C</span>
+          </div>
+          <div id="humi">
+            <label for="">Current humidity:</label>
+            <span id="humidity"></span> <span>%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-side">
+        <p>Manula activation</p>
+        <button id="ON-button" >Turn ON</button>
+        <button id="OFF-button">Turn OFF</button>
+      </div>
+
+      <div id="temp_setings">
+        <div id="MAX_TEMP">
+          <label for="max_temp">Max Temp°C</label>
+          <input type="text" id="max_temp">
+        </div>
+        <div id="MIN_TEMP">
+          <label for="min_temp">Min Temp°C</label>
+          <input type="text" id="min_temp">
+        </div>
+        
+      </div>
+      <div class="Auto">
+        <label for="">Automatic activation</label>
+        <div class="Butons">
+          <button id="AutoON">ON</button>
+          <button id="AutoOFF">OFF</button>   
+        </div>
+      </div>
+      <div class="status" id="status">Status: Nepoznat</div>
+    </div>
+
+    <script type="module" src="script_devices.js"></script>
+</body>
+</html>
