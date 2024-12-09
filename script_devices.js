@@ -32,7 +32,17 @@ function UpdateStatusAutoMode(state){
     ElementStatus.textContent="Status: Auto mode is OFF";
  }
 }
-
+function InfoMessage(state){
+ const ElementStatus = document.getElementById("status");
+ const Inforef = ref(db,"info/message");
+ 
+ onValue(Inforef, (snapshot)=>{
+  const message = snapshot.val();
+  if(state){
+    ElementStatus.textContent = "Status: " + message;
+  }
+  })
+}
 let ButonState=false;
 const ManualON=document.getElementById("ON-button");
 const ManualOFF=document.getElementById("OFF-button");
@@ -97,6 +107,7 @@ document.getElementById("AutoON").addEventListener("click",function(){
     console.log("Auto mode turned ON");
     UpdateStatusAutoMode(true);
     UpdateButonState(true);
+    InfoMessage(true);
   })
   .catch((error) =>{
     console.error("Error turning ON auto mode:", error);

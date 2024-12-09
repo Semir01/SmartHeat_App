@@ -13,11 +13,15 @@ const char* password = "102030102030";
 //const char* net = "semir";
 //const char* password = "semirjazvin";
 
+//Firebase postavke
 #define API_KEY "AIzaSyDbp42OfCdd4opQnsOC0RLZIUuW8c95YvI"
 #define DATABASE_URL "https://smartheat-951e2-default-rtdb.firebaseio.com/"
+
 // Pinovi i senzori
 #define DHTPIN D2
 #define DHTTYPE DHT22
+
+//Kreiranje objekata 
 DHT dhtSensor(DHTPIN, DHTTYPE);
 const int relay1 = D1;
 
@@ -118,13 +122,25 @@ void AutoMod(){
   if(statusAutoMod == 1){
     if(CurrentTemp < minTemp){
       digitalWrite(relay1,LOW);
-      Serial.println("Heating is ON - Current temperature below minTemp");
+      if(Firebase.RTDB.setString(&fbData,"info/message","Heating is ON - Current temperature below minTemp")){
+        Serial.println("Info message sent to Firebase");
+      }else{
+         Serial.println("Faild to sent message to Firebase");
+      }
     }else if(CurrentTemp > maxTemp){
       digitalWrite(relay1,HIGH);
-      Serial.println("Heating is OFF - Current temperature above maxTemp");
+      if(Firebase.RTDB.setString(&fbData,"info/message","Heating is OFF - Current temperature above maxTemp")){
+        Serial.println("Info message sent to Firebase");
+      }else{
+         Serial.println("Faild to sent message to Firebase");
+      }
     }else{
       digitalWrite(relay1,HIGH);
-      Serial.println("Temperature within range - No action taken ");
+      if(Firebase.RTDB.setString(&fbData,"info/message","Temperature within range - No action taken")){
+        Serial.println("Info message sent to Firebase");
+      }else{
+         Serial.println("Faild to sent message to Firebase");
+      }
     }
   }else {
     ManualMode();  
