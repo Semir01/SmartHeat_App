@@ -1,4 +1,4 @@
-
+// Konfiguracija Firebase-a
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
@@ -14,8 +14,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+//==================================================================================================================//
 
-//Funkcija koja mjenja status na stranici u zavisnosti da li je grijanje upaljeno ili izgašeno
+//Funkcija koja mijenja status na aplikaciji u zavisnosti da li je manuelno izvršeno uključivanje ili isključivanje 
 function UpdateStatus(state){
   const ElementStatus = document.getElementById("status");
   if(state){
@@ -24,6 +25,8 @@ function UpdateStatus(state){
     ElementStatus.textContent = "Status: Heating is OFF";
   }
 }
+
+//Funkcija koja mijenja status na aplikaciji u zavisnosti da li je upaljeno ili izgašeno automatska kontrola 
 function UpdateStatusAutoMode(state){
  const ElementStatus = document.getElementById("status");
  if(state){
@@ -32,10 +35,12 @@ function UpdateStatusAutoMode(state){
     ElementStatus.textContent="Status: Auto mode is OFF";
  }
 }
+
+//Fukcija za dohvatanje povratne poruke sa Firebase-a, kada je automatsko grijanje uključeno
 function InfoMessage(state){
  const ElementStatus = document.getElementById("status");
  const Inforef = ref(db,"info/message");
- 
+
  onValue(Inforef, (snapshot)=>{
   const message = snapshot.val();
   if(state){
@@ -43,6 +48,8 @@ function InfoMessage(state){
   }
   })
 }
+
+//Funkcija koja mijenja stanje dugmića na aplikaciji u zavisnosti da li je Automatsko grijanje uključeno ili isključeno
 let ButonState=false;
 const ManualON=document.getElementById("ON-button");
 const ManualOFF=document.getElementById("OFF-button");
@@ -56,6 +63,9 @@ function UpdateButonState(ButonState){
   }
 }
 
+//==================================================================================================================//
+
+//MANUELNA KONTROLA GRIJANJA//
 // Dodavanje događaja za gumb "Turn ON"
 document.getElementById("ON-button").addEventListener("click", function () {
   const relayRef = ref(db, "relay1/status"); // Referenca na lokaciju u bazi
@@ -81,24 +91,9 @@ document.getElementById("OFF-button").addEventListener("click", function () {
     });
 });
 
-//Funkcija za ucitavanje podataka sa baze za senzor 
-function GetSensorData(){
-  const temReference=ref(db,'sensor/temperature');
-  const humyReference=ref(db,'sensor/humidity');
+//==================================================================================================================//
 
-  onValue(temReference,(snapshot)=>{
-    const temperature = snapshot.val();
-    document.getElementById('temperature').textContent=temperature;
-  });
-
-  onValue(humyReference,(snapshot)=>{
-    const humidity=snapshot.val();
-    document.getElementById("humidity").textContent=humidity;
-  })
-}
-//Poziv funkcije 
-GetSensorData();
-
+//AUTOMATSKA KONTROLA GRIJANJA//
 // Dodavanje događaja za gumb "AutoON"
 document.getElementById("AutoON").addEventListener("click",function(){
   const AutoModref = ref(db,"autoMod/statusAutoMode"); // Referenca n lokaciju u bazi
@@ -126,6 +121,8 @@ document.getElementById("AutoOFF").addEventListener("click",function(){
     console.error("Error turning OFF auto mode:", error);
   });
 });
+
+//==================================================================================================================//
 
 // Dodavanje funkcionalnosti za Max i Min temperature
 document.getElementById("max_temp").addEventListener("input",function (){
@@ -163,3 +160,24 @@ document.getElementById("min_temp").addEventListener("input",function (){
   });
 });
 
+//==================================================================================================================//
+
+//Funkcija za ucitavanje podataka sa baze za senzor 
+function GetSensorData(){
+  const temReference=ref(db,'sensor/temperature');
+  const humyReference=ref(db,'sensor/humidity');
+
+  onValue(temReference,(snapshot)=>{
+    const temperature = snapshot.val();
+    document.getElementById('temperature').textContent=temperature;
+  });
+
+  onValue(humyReference,(snapshot)=>{
+    const humidity=snapshot.val();
+    document.getElementById("humidity").textContent=humidity;
+  })
+}
+//Poziv funkcije 
+GetSensorData();
+
+//==================================================================================================================//
