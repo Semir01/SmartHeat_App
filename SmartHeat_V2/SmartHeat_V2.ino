@@ -6,22 +6,20 @@
 #include "addons/TokenHelper.h"
 #include "addons/RTDBHelper.h"
 
+//===================================================================//
 
 const char* net = "net_2232";
 const char* password = "102030102030";
-
 //const char* net = "semir";
 //const char* password = "semirjazvin";
 
-//Firebase postavke
+//Firebase settings
 #define API_KEY "AIzaSyDbp42OfCdd4opQnsOC0RLZIUuW8c95YvI"
 #define DATABASE_URL "https://smartheat-951e2-default-rtdb.firebaseio.com/"
-
-// Pinovi i senzori
+//Pin and senzor type
 #define DHTPIN D2
 #define DHTTYPE DHT22
-
-//Kreiranje objekata 
+//Ceating objects
 DHT dhtSensor(DHTPIN, DHTTYPE);
 const int relay1 = D1;
 
@@ -29,10 +27,12 @@ FirebaseData fbData;
 FirebaseConfig config;
 FirebaseAuth auth;
 
+//===================================================================//
+
 void setup() {
   Serial.begin(115200);
   
-  // Povezivanje s WiFi mrežom
+  //Conecting in WiFi
   WiFi.begin(net, password);
   Serial.print("Conecting");
   while (WiFi.status() != WL_CONNECTED) {
@@ -57,12 +57,16 @@ void setup() {
   Firebase.begin(&config,&auth);
   Firebase.reconnectWiFi(true);
 
-  // Pokretanje DHT senzora
+  //Starting DHT senzor
   dhtSensor.begin();
-  // Inicijalizacija pina za relej
+
+  //Define pin for relay
   pinMode(relay1, OUTPUT);
-  digitalWrite(relay1, HIGH); // Početno isključivanje releja
+  //Relay is OFF
+  digitalWrite(relay1, HIGH);
 }
+
+//===================================================================//
 
 void ManualMode(){
   delay(1200);
@@ -80,6 +84,9 @@ void ManualMode(){
     Serial.println(fbData.errorReason());
   }
 }
+
+//===================================================================//
+
 void SensorDataToFirebase(){
   float temperature = dhtSensor.readTemperature();
   float humidity = dhtSensor.readHumidity();
@@ -105,6 +112,9 @@ void SensorDataToFirebase(){
     Serial.println(fbData.errorReason());
   }
 }
+
+//===================================================================//
+
 void AutoMod(){
   Firebase.RTDB.getInt(&fbData,"autoMod/statusAutoMode");
   int statusAutoMod=fbData.intData();
@@ -118,16 +128,16 @@ void AutoMod(){
   Firebase.RTDB.getInt(&fbData,"sensor/temperature");
   int CurrentTemp = fbData.intData();
 
-
+  float histereza = 0.5;
   if(statusAutoMod == 1){
-    if(CurrentTemp < minTemp){
+    if(CurrentTemp < minTemp - histereza){
       digitalWrite(relay1,LOW);
       if(Firebase.RTDB.setString(&fbData,"info/message","Heating is ON - Current temperature below minTemp")){
         Serial.println("Info message sent to Firebase");
       }else{
          Serial.println("Faild to sent message to Firebase");
       }
-    }else if(CurrentTemp > maxTemp){
+    }else if(CurrentTemp > maxTemp + histereza){
       digitalWrite(relay1,HIGH);
       if(Firebase.RTDB.setString(&fbData,"info/message","Heating is OFF - Current temperature above maxTemp")){
         Serial.println("Info message sent to Firebase");
@@ -136,7 +146,7 @@ void AutoMod(){
       }
     }else{
       digitalWrite(relay1,HIGH);
-      if(Firebase.RTDB.setString(&fbData,"info/message","Temperature within range - No action taken")){
+      if(Firebase.RTDB.setString(&fbData,"info/message","Heating is OFF - Temperature within range. No action taken")){
         Serial.println("Info message sent to Firebase");
       }else{
          Serial.println("Faild to sent message to Firebase");
@@ -147,8 +157,9 @@ void AutoMod(){
   }
 }
 
+//===================================================================//
+
 void loop() {
-  // put your main code here, to run repeatedly:
   // Auto control for relay1
   AutoMod();
   // Sending data from DHT sensor on Firebase
