@@ -10,6 +10,7 @@
 
 const char* net = "net_2232";
 const char* password = "102030102030";
+
 //const char* net = "semir";
 //const char* password = "semirjazvin";
 
@@ -30,7 +31,7 @@ FirebaseAuth auth;
 //===================================================================//
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   
   //Conecting in WiFi
   WiFi.begin(net, password);
@@ -88,6 +89,7 @@ void ManualMode(){
 //===================================================================//
 
 void SensorDataToFirebase(){
+  delay(3000);
   float temperature = dhtSensor.readTemperature();
   float humidity = dhtSensor.readHumidity();
 
